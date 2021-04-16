@@ -1,0 +1,36 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PlayerController : MonoBehaviour
+{
+    float x;
+    float z;
+    public float moveSpeed;
+    Rigidbody rb;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        //キーボードで移動
+        x = Input.GetAxisRaw("Horizontal");
+        z = Input.GetAxisRaw("Vertical");
+    }
+
+    private void FixedUpdate() {
+
+        //Playerの方向転換
+        Vector3 direction = transform.position + new Vector3(x, 0, z) * moveSpeed;
+        transform.LookAt(direction);
+        //速度設定
+        rb.velocity = new Vector3(x, 0, z) * moveSpeed;
+
+
+    }
+}
